@@ -1,0 +1,3 @@
+ASensor.cpp:12:1:HAL::ASensor::ASensor()	16	static
+ASensor.cpp:17:1:HAL::ASensor::~ASensor()	16	static
+ASensor.cpp:17:1:virtual HAL::ASensor::~ASensor()	16	static

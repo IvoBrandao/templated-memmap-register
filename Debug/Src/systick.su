@@ -1,0 +1,19 @@
+Register.h:229:29:constexpr UnderlyingType<E> EnumToUnderlyingType(E) [with E = HAL::SystickControl; <template-parameter-1-2> = HAL::SystickControl]	16	static
+Systick.cpp:12:1:HAL::Systick::Systick(uint32_t, uint32_t)	48	static
+Systick.cpp:36:1:HAL::Systick::~Systick()	16	static
+Systick.cpp:36:1:virtual HAL::Systick::~Systick()	16	static
+Systick.cpp:42:6:void HAL::Systick::Enable()	32	static
+Systick.cpp:49:6:void HAL::Systick::Disable()	32	static
+Systick.cpp:55:6:void HAL::Systick::AcknowledgeIrq()	16	static
+Systick.cpp:60:15:uint32_t HAL::Systick::GetInterval()	16	static
+Systick.cpp:65:15:uint32_t HAL::Systick::GetCount()	24	static
+Systick.cpp:71:15:uint32_t HAL::Systick::GetOverflow()	16	static
+Register.h:102:11:Register<size, RegisterAccess>::Register(uint32_t) [with unsigned int size = 32; RegisterAccess = ReadWrite]	16	static
+Register.h:160:18:Register<size, RegisterAccess>::Bitfield Register<size, RegisterAccess>::operator[](unsigned int) [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:63:8:void Register<size, RegisterAccess>::Bitfield::operator=(Register<size, RegisterAccess>::BaseType) [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:109:14:void Register<size, RegisterAccess>::operator=(Register<size, RegisterAccess>::BaseType) [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:114:9:Register<size, RegisterAccess>::operator Register<size, RegisterAccess>::BaseType() const [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:70:3:Register<size, RegisterAccess>::Bitfield::Bitfield(Register<size, RegisterAccess>*, unsigned int) [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:80:8:void Register<size, RegisterAccess>::Bitfield::write(Register<size, RegisterAccess>::BaseType, WriteOnly) [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:181:14:void Register<size, RegisterAccess>::write(Register<size, RegisterAccess>::BaseType, WriteOnly) [with unsigned int size = 32; RegisterAccess = ReadWrite]	24	static
+Register.h:190:18:Register<size, RegisterAccess>::BaseType Register<size, RegisterAccess>::read(ReadOnly) const [with unsigned int size = 32; RegisterAccess = ReadWrite]	16	static

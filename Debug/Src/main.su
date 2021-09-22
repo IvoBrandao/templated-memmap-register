@@ -1,0 +1,61 @@
+new:173:33:void* operator new(std::size_t, void*)	16	static
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+shared_ptr_base.h:508:5:static const std::type_info& std::_Sp_make_shared_tag::_S_ti()	4	static
+main.cpp:8:5:int main()	24	static
+main.cpp:21:17:void SysTick_Handler()	4	static
+main.cpp:27:17:void WWDG1_IRQHandler()	4	static
+shared_ptr_base.h:131:7:void std::_Sp_counted_base<_Lp>::_M_destroy() [with __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+shared_ptr.h:714:5:) [with _Tp = HAL::Systick; _Args = {int, int}]	40	static
+shared_ptr_base.h:1012:7:std::__shared_ptr_access<_Tp, _Lp, <anonymous>, <anonymous> >::element_type* std::__shared_ptr_access<_Tp, _Lp, <anonymous>, <anonymous> >::operator->() const [with _Tp = HAL::Systick; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single; bool <anonymous> = false; bool <anonymous> = false]	16	static
+shared_ptr_base.h:121:7:std::_Sp_counted_base<_Lp>::~_Sp_counted_base() [with __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+shared_ptr_base.h:121:7:std::_Sp_counted_base<_Lp>::~_Sp_counted_base() [with __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+allocator.h:138:7:std::allocator< <template-parameter-1-1> >::allocator() [with _Tp = HAL::Systick]	16	static
+allocator.h:153:7:std::allocator< <template-parameter-1-1> >::~allocator() [with _Tp = HAL::Systick]	16	static
+move.h:74:5:constexpr _Tp&& std::forward(typename std::remove_reference<_Tp>::type&) [with _Tp = int]	16	static
+shared_ptr.h:699:5:) [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; _Args = {int, int}]	32	static
+shared_ptr_base.h:1020:7:std::__shared_ptr_access<_Tp, _Lp, <anonymous>, <anonymous> >::element_type* std::__shared_ptr_access<_Tp, _Lp, <anonymous>, <anonymous> >::_M_get() const [with _Tp = HAL::Systick; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single; bool <anonymous> = false; bool <anonymous> = false]	16	static
+new_allocator.h:80:7:__gnu_cxx::new_allocator<_Tp>::new_allocator() [with _Tp = HAL::Systick]	16	static
+new_allocator.h:89:7:__gnu_cxx::new_allocator<_Tp>::~new_allocator() [with _Tp = HAL::Systick]	16	static
+shared_ptr.h:358:2:) [with _Alloc = std::allocator<HAL::Systick>; _Args = {int, int}; _Tp = HAL::Systick]	32	static
+shared_ptr_base.h:1309:7:std::__shared_ptr<_Tp, _Lp>::element_type* std::__shared_ptr<_Tp, _Lp>::get() const [with _Tp = HAL::Systick; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+shared_ptr_base.h:1343:2:) [with _Alloc = std::allocator<HAL::Systick>; _Args = {int, int}; _Tp = HAL::Systick; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	48	static
+shared_ptr_base.h:672:2:) [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; _Args = {int, int}; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	64	static
+shared_ptr_base.h:1388:2:typename std::enable_if<(! std::__shared_ptr<_Tp, _Lp>::__has_esft_base<_Yp2>::value)>::type std::__shared_ptr<_Tp, _Lp>::_M_enable_shared_from_this_with(_Yp*) [with _Yp = HAL::Systick; _Yp2 = HAL::Systick; _Tp = HAL::Systick; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+allocator.h:151:2:std::allocator< <template-parameter-1-1> >::allocator(const std::allocator<_Tp1>&) [with _Tp1 = HAL::Systick; _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+allocator.h:153:7:std::allocator< <template-parameter-1-1> >::~allocator() [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+allocated_ptr.h:95:5:std::__allocated_ptr<_Alloc> std::__allocate_guarded(_Alloc&) [with _Alloc = std::allocator<std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single> >]	16	static
+allocated_ptr.h:70:7:std::__allocated_ptr<_Alloc>::~__allocated_ptr() [with _Alloc = std::allocator<std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single> >]	16	static
+allocated_ptr.h:85:19:std::__allocated_ptr<_Alloc>::value_type* std::__allocated_ptr<_Alloc>::get() [with _Alloc = std::allocator<std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single> >]	16	static
+allocator.h:141:7:std::allocator< <template-parameter-1-1> >::allocator(const std::allocator< <template-parameter-1-1> >&) [with _Tp = HAL::Systick]	16	static
+shared_ptr_base.h:412:12:std::_Sp_ebo_helper<0, std::allocator<HAL::Systick>, true>::~_Sp_ebo_helper()	16	static
+shared_ptr_base.h:526:13:std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>::_Impl::~_Impl()	16	static
+shared_ptr_base.h:543:2:) [with _Args = {int, int}; _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	40	static
+allocated_ptr.h:78:7:std::__allocated_ptr<_Alloc>& std::__allocated_ptr<_Alloc>::operator=(std::nullptr_t) [with _Alloc = std::allocator<std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single> >]	16	static
+shared_ptr_base.h:594:12:_Tp* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_ptr() [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+new_allocator.h:80:7:__gnu_cxx::new_allocator<_Tp>::new_allocator() [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+new_allocator.h:89:7:__gnu_cxx::new_allocator<_Tp>::~new_allocator() [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+alloc_traits.h:443:7:static _Tp* std::allocator_traits<std::allocator<_Tp1> >::allocate(std::allocator_traits<std::allocator<_Tp1> >::allocator_type&, std::allocator_traits<std::allocator<_Tp1> >::size_type) [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+allocated_ptr.h:52:7:std::__allocated_ptr<_Alloc>::__allocated_ptr(_Alloc&, std::__allocated_ptr<_Alloc>::pointer) [with _Alloc = std::allocator<std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single> >]	24	static
+alloc_traits.h:469:7:static void std::allocator_traits<std::allocator<_Tp1> >::deallocate(std::allocator_traits<std::allocator<_Tp1> >::allocator_type&, std::allocator_traits<std::allocator<_Tp1> >::pointer, std::allocator_traits<std::allocator<_Tp1> >::size_type) [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	24	static
+ptr_traits.h:155:5:constexpr _Tp* std::__to_address(_Tp*) [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+new_allocator.h:83:7:__gnu_cxx::new_allocator<_Tp>::new_allocator(const __gnu_cxx::new_allocator<_Tp>&) [with _Tp = HAL::Systick]	16	static
+shared_ptr_base.h:117:7:std::_Sp_counted_base<_Lp>::_Sp_counted_base() [with __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+shared_ptr_base.h:531:11:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_Impl::_Impl(_Alloc) [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+alloc_traits.h:482:2:) [with _Up = HAL::Systick; _Args = {int, int}; _Tp = HAL::Systick]	32	static
+aligned_buffer.h:114:7:_Tp* __gnu_cxx::__aligned_buffer<_Tp>::_M_ptr() [with _Tp = HAL::Systick]	16	static
+new_allocator.h:102:7:_Tp* __gnu_cxx::new_allocator<_Tp>::allocate(__gnu_cxx::new_allocator<_Tp>::size_type, const void*) [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	24	static
+move.h:47:5:constexpr _Tp* std::__addressof(_Tp&) [with _Tp = std::allocator<std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single> >]	16	static
+new_allocator.h:119:7:void __gnu_cxx::new_allocator<_Tp>::deallocate(__gnu_cxx::new_allocator<_Tp>::pointer, __gnu_cxx::new_allocator<_Tp>::size_type) [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	24	static
+shared_ptr_base.h:414:16:std::_Sp_ebo_helper<_Nm, _Tp, true>::_Sp_ebo_helper(const _Tp&) [with int _Nm = 0; _Tp = std::allocator<HAL::Systick>]	16	static
+new_allocator.h:144:2:) [with _Up = HAL::Systick; _Args = {int, int}; _Tp = HAL::Systick]	32	static
+aligned_buffer.h:102:7:void* __gnu_cxx::__aligned_buffer<_Tp>::_M_addr() [with _Tp = HAL::Systick]	16	static
+new_allocator.h:132:7:__gnu_cxx::new_allocator<_Tp>::size_type __gnu_cxx::new_allocator<_Tp>::max_size() const [with _Tp = std::_Sp_counted_ptr_inplace<HAL::Systick, std::allocator<HAL::Systick>, __gnu_cxx::_S_single>]	16	static
+shared_ptr_base.h:552:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+shared_ptr_base.h:552:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+shared_ptr_base.h:555:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	24	static
+shared_ptr_base.h:562:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	32	static
+shared_ptr_base.h:575:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	24	static
+shared_ptr_base.h:533:10:_Alloc& std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_Impl::_M_alloc() [with _Tp = HAL::Systick; _Alloc = std::allocator<HAL::Systick>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
+alloc_traits.h:495:2:static void std::allocator_traits<std::allocator<_Tp1> >::destroy(std::allocator_traits<std::allocator<_Tp1> >::allocator_type&, _Up*) [with _Up = HAL::Systick; _Tp = HAL::Systick]	16	static
+shared_ptr_base.h:418:7:static _Tp& std::_Sp_ebo_helper<_Nm, _Tp, true>::_S_get(std::_Sp_ebo_helper<_Nm, _Tp, true>&) [with int _Nm = 0; _Tp = std::allocator<HAL::Systick>]	16	static
+new_allocator.h:151:2:void __gnu_cxx::new_allocator<_Tp>::destroy(_Up*) [with _Up = HAL::Systick; _Tp = HAL::Systick]	16	static

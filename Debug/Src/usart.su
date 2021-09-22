@@ -1,0 +1,3 @@
+usart.cpp:12:1:HAL::USART::USART()	16	static
+usart.cpp:17:1:HAL::USART::~USART()	16	static
+usart.cpp:21:6:void HAL::USART::SetStatus()	16	static

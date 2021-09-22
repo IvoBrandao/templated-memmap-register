@@ -1,0 +1,3 @@
+ADriver.cpp:12:1:HAL::ADriver::ADriver()	16	static
+ADriver.cpp:17:1:HAL::ADriver::~ADriver()	16	static
+ADriver.cpp:17:1:virtual HAL::ADriver::~ADriver()	16	static

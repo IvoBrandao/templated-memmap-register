@@ -1,0 +1,3 @@
+ADevice.cpp:12:1:HAL::ADevice::ADevice()	16	static
+ADevice.cpp:17:1:HAL::ADevice::~ADevice()	16	static
+ADevice.cpp:17:1:virtual HAL::ADevice::~ADevice()	16	static
