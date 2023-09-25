@@ -7,8 +7,6 @@
 #include <stdexcept>
 #include <type_traits>
 
-// Documentation should be added throughout the code.
-
 template <unsigned int S> struct RegisterTraits {};
 
 template <> struct RegisterTraits<8> {
