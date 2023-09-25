@@ -1,51 +1,56 @@
 #include "Mock_Systick.h"
+#include "Systick.h"
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
 
-#if 0
-class SystickMockImplNotSetException : public std::exception {
-public:
-  const char *what() const throw() {
-    return "Systick Mock Implementation not set";
+static MockSystickImpl *p_MockInterfaceSystick = nullptr;
+
+MockSystickImpl::MockSystickImpl() {
+  if (p_MockInterfaceSystick == nullptr) {
+    p_MockInterfaceSystick = this;
   }
-};
-
-static InternalMockSystick *p_IMockSystick = nullptr;
-
-//
-InternalMockSystick::InternalMockSystick(
-    std::uint32_t base_address, std::uint32_t system_clock_frequency_hz,
-    std::uint32_t systick_frequency_hz) {}
-//
-InternalMockSystick::~InternalMockSystick() {}
-
-IMockSystick *getTestDouble() {
-  IMockSystick *p_selected = p_IMockSystick;
-
-  if (p_IMockSystick == nullptr) {
-    std::cerr << "ERROR: No test double selected for IMock_Systick"
-              << std::endl;
-    throw SystickMockImplNotSetException();
-  }
-
-  return p_selected;
 }
 
-void resetTestDouble() { p_IMockSystick = nullptr; }
+MockSystickImpl::~MockSystickImpl() {
+  if (p_MockInterfaceSystick != nullptr) {
+    delete p_MockInterfaceSystick;
+    p_MockInterfaceSystick = nullptr;
+  }
+}
 
-void Enable() { p_IMockSystick->Enable(); }
+MockInterfaceSystick *MockSystickImpl::getMock() {
+  MockInterfaceSystick *p_interface = p_MockInterfaceSystick;
 
-#if 0
-void Disable() { getTestDouble()->Disable(); }
+  if (p_interface == nullptr) {
+    std::cerr << "ERROR: No test mock instance for Systick" << std::endl;
+    throw SystickMockImplNotSetException();
+  }
+  return p_interface;
+}
 
-void AcknowledgeIrq() { getTestDouble()->AcknowledgeIrq(); }
+/// -----------------------------------------------------------------
+// Implementation of the Systick class
+Systick::Systick(std::uint32_t base_address,
+                 std::uint32_t system_clock_frequency_hz,
+                 std::uint32_t systick_frequency_hz) {}
 
-std::uint32_t GetInterval() { return getTestDouble()->GetInterval(); }
+Systick::~Systick() {}
 
-std::uint32_t GetCount() { return getTestDouble()->GetCount(); }
+void Systick::Enable() { MockSystickImpl::getMock()->Enable(); }
 
-std::uint32_t GetOverflow() { return getTestDouble()->GetOverflow(); }
-#endif
+void Systick::Disable() { MockSystickImpl::getMock()->Disable(); }
 
-#endif
+void Systick::AcknowledgeIrq() { MockSystickImpl::getMock()->AcknowledgeIrq(); }
+
+std::uint32_t Systick::GetInterval() {
+  return MockSystickImpl::getMock()->GetInterval();
+}
+
+std::uint32_t Systick::GetCount() {
+  return MockSystickImpl::getMock()->GetCount();
+}
+
+std::uint32_t Systick::GetOverflow() {
+  return MockSystickImpl::getMock()->GetOverflow();
+}
