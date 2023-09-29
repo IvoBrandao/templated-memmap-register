@@ -1,7 +1,7 @@
 
 # --- Configure the library ---
 set(SUBMODULE_NAME app)
-set(SUBMODULE_DEPS systickdrv)
+set(SUBMODULE_DEPS systickdrv mmr)
 set(SUBMODULE_TYPE STATIC)
 
 # --- build the library ---
