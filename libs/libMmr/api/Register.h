@@ -10,7 +10,7 @@
 #include <utility>
 
 // Enable or disable debug prints
-constexpr bool enableDebugPrints = true;
+constexpr bool enableDebugPrints = false;
 
 template <unsigned int size> struct RegisterTraits {};
 
@@ -45,12 +45,7 @@ public:
   explicit Register() : raw_ptr{nullptr} {}
 
   explicit Register(std::uintptr_t address)
-      : raw_ptr{reinterpret_cast<volatile BaseType *>(address)} {
-    if (raw_ptr == nullptr) {
-      throw std::invalid_argument("Invalid memory address for register.");
-    }
-    printDebug("Register constructor", read());
-  }
+      : raw_ptr{reinterpret_cast<volatile BaseType *>(address)} {}
 
   // Bit Proxy class for bit manipulation
   class BitProxy {
@@ -74,15 +69,11 @@ public:
 
   // Bit access operator [] - provides a proxy for bit manipulation
   BitProxy operator[](std::size_t bit_position) {
-    assert(raw_ptr != nullptr);
-    assert(bit_position < size);
-
     return BitProxy(*this, bit_position);
   }
 
   // Bit access operator [] - read
   bool getBit(std::size_t bit_position) const {
-    assert(raw_ptr != nullptr);
     assert(bit_position < size);
 
     BaseType val = read();
@@ -91,7 +82,6 @@ public:
 
   // Bit access operator [] - write
   void setBit(std::size_t bit_position, bool value) {
-    assert(raw_ptr != nullptr);
     assert(bit_position < size);
 
     BaseType val = read();
@@ -105,6 +95,7 @@ public:
 
   // Assignment operator to read the value
   operator BaseType() const {
+
     BaseType val = read();
     printDebug("Register read (assignment operator)", val);
     return val;
@@ -112,12 +103,14 @@ public:
 
   // Assignment operator to write the value
   void operator=(BaseType value) {
+
     write(value);
     printDebug("Register =", value);
   }
 
   // Increment and decrement operators
   BaseType &operator++() {
+
     BaseType val = read();
     ++val;
     write(val);
@@ -126,6 +119,7 @@ public:
   }
 
   BaseType operator++(int) {
+
     BaseType old = read();
     BaseType val = old;
     ++val;
@@ -135,6 +129,7 @@ public:
   }
 
   BaseType &operator--() {
+
     BaseType val = read();
     --val;
     write(val);
@@ -143,6 +138,7 @@ public:
   }
 
   BaseType operator--(int) {
+
     BaseType old = read();
     BaseType val = old;
     --val;
@@ -153,6 +149,7 @@ public:
 
   // Addition and subtraction operators
   void operator+=(BaseType value) {
+
     BaseType val = read();
     val += value;
     write(val);
@@ -160,6 +157,7 @@ public:
   }
 
   void operator-=(BaseType value) {
+
     BaseType val = read();
     val -= value;
     write(val);
@@ -176,6 +174,7 @@ public:
 
   // Bitwise OR operator
   void operator|=(BaseType bit_mask) {
+
     BaseType val = read();
     val |= bit_mask;
     write(val);
@@ -184,6 +183,7 @@ public:
 
   // Bitwise AND operator
   void operator&=(BaseType bit_mask) {
+
     BaseType val = read();
     val &= bit_mask;
     write(val);
@@ -204,19 +204,17 @@ public:
 
   void SetAddress(std::uintptr_t address) {
     raw_ptr = reinterpret_cast<volatile BaseType *>(address);
-    if (raw_ptr == nullptr) {
-      throw std::invalid_argument("Invalid memory address for register.");
-    }
-    printDebug("Register SetAddress", read());
   }
 
 protected:
   void write(BaseType bit_mask) {
+    assert(raw_ptr != nullptr);
     *raw_ptr = bit_mask;
     printDebug("Raw write", bit_mask);
   }
 
   BaseType read() const {
+    assert(raw_ptr != nullptr);
     BaseType val = *raw_ptr;
     printDebug("Raw read", val);
     return val;
