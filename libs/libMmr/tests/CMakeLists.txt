@@ -14,7 +14,7 @@ file(GLOB SUBMODULE_TESTS_TESTS_SRC ${CMAKE_CURRENT_LIST_DIR}/*.cpp)
 
 include(GoogleTest)
 # Define the test executable for this library's tests
-add_executable(${SUBMODULE_TESTS_NAME} )
+add_executable(${SUBMODULE_TESTS_NAME})
 
 # Include the 'include' directory for library headers
 target_include_directories(${SUBMODULE_TESTS_NAME}
@@ -44,4 +44,5 @@ gtest_add_tests(TARGET      ${SUBMODULE_TESTS_NAME}
                 TEST_LIST   ${SUBMODULE_TESTS_NAME}
 )
 # Add tests using CTest (optional)
-add_test(NAME ${SUBMODULE_TESTS_NAME} COMMAND ${SUBMODULE_TESTS_NAME})
+add_test(NAME ${SUBMODULE_TESTS_NAME} 
+COMMAND ${SUBMODULE_TESTS_NAME})

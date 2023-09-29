@@ -7,50 +7,18 @@
 static MockSystickImpl *p_MockInterfaceSystick = nullptr;
 
 MockSystickImpl::MockSystickImpl() {
+  // std::cout << "MockSystickImpl::MockSystickImpl()" << std::endl;
   if (p_MockInterfaceSystick == nullptr) {
     p_MockInterfaceSystick = this;
   }
+
+  mmr_base_address = reinterpret_cast<std::uintptr_t>(&dummy_registers[0]);
+
+  // Initialize register addresses with dummy values
+  mmr.CSR.SetAddress(mmr_base_address);
+  mmr.RVR.SetAddress(mmr_base_address + 0x04UL);
+  mmr.CVR.SetAddress(mmr_base_address + 0x08UL);
+  mmr.CR.SetAddress(mmr_base_address + 0x0CUL);
 }
 
-MockSystickImpl::~MockSystickImpl() {
-  if (p_MockInterfaceSystick != nullptr) {
-    delete p_MockInterfaceSystick;
-    p_MockInterfaceSystick = nullptr;
-  }
-}
-
-MockInterfaceSystick *MockSystickImpl::getMock() {
-  MockInterfaceSystick *p_interface = p_MockInterfaceSystick;
-
-  if (p_interface == nullptr) {
-    std::cerr << "ERROR: No test mock instance for Systick" << std::endl;
-    throw SystickMockImplNotSetException();
-  }
-  return p_interface;
-}
-
-/// -----------------------------------------------------------------
-// Implementation of the Systick class
-Systick::Systick(std::uint32_t base_address,
-                 std::uint32_t system_clock_frequency_hz,
-                 std::uint32_t systick_frequency_hz) {}
-
-Systick::~Systick() {}
-
-void Systick::Enable() { MockSystickImpl::getMock()->Enable(); }
-
-void Systick::Disable() { MockSystickImpl::getMock()->Disable(); }
-
-void Systick::AcknowledgeIrq() { MockSystickImpl::getMock()->AcknowledgeIrq(); }
-
-std::uint32_t Systick::GetInterval() {
-  return MockSystickImpl::getMock()->GetInterval();
-}
-
-std::uint32_t Systick::GetCount() {
-  return MockSystickImpl::getMock()->GetCount();
-}
-
-std::uint32_t Systick::GetOverflow() {
-  return MockSystickImpl::getMock()->GetOverflow();
-}
+MockSystickImpl::~MockSystickImpl() {}
