@@ -1,8 +1,18 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(Example_Project)
+
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/tools/cmake/modules)
 include(FetchContent)
 include(CTest)
+# Enable code coverage for GCC-based compilers
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+endif()
+include(CodeCoverage)
+append_coverage_compiler_flags()
+
 
 # Set C++ standard to C++17 or higher
 set(CMAKE_CXX_STANDARD 17)

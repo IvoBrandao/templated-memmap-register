@@ -46,3 +46,10 @@ gtest_add_tests(TARGET      ${SUBMODULE_TESTS_NAME}
 )
 # Add tests using CTest (optional)
 add_test(NAME ${SUBMODULE_TESTS_NAME} COMMAND ${SUBMODULE_TESTS_NAME})
+gtest_discover_tests(${SUBMODULE_TESTS_NAME})
+
+if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+    target_compile_options(${SUBMODULE_TESTS_NAME} PRIVATE --coverage)
+    target_link_options(${SUBMODULE_TESTS_NAME} PRIVATE --coverage)
+endif()
+
