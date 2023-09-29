@@ -1,14 +1,16 @@
 #ifndef MEMMAP_REGISTER_H_
 #define MEMMAP_REGISTER_H_
 
+#include <cassert>
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
 #include <type_traits>
+#include <utility>
 
 // Enable or disable debug prints
-constexpr bool enableDebugPrints = false;
+constexpr bool enableDebugPrints = true;
 
 template <unsigned int size> struct RegisterTraits {};
 
@@ -39,41 +41,9 @@ class Register {
   typedef typename RegisterTraits<size>::PrimitiveType BaseType;
 
 public:
-  class Bitfield {
-  public:
-    // Pass a reference to the Register instance to the Bitfield constructor
-    Bitfield(Register<size, RegisterAccess> &reg, unsigned int num)
-        : owner{&reg}, bit_num{num} {}
+  // add a contructor that allows to instanciate the register without an address
+  explicit Register() : raw_ptr{nullptr} {}
 
-    operator BaseType() const {
-      owner->printDebug("Bitfield read");
-      return read();
-    }
-
-    void operator=(BaseType val) {
-      owner->printDebug("Bitfield write", val);
-      write(val);
-    }
-
-  protected:
-    BaseType read() const {
-      return (*(owner->raw_ptr) & (1 << bit_num)) ? 1 : 0;
-    }
-
-    void write(BaseType val) {
-      if (val == 0)
-        *(owner->raw_ptr) &= ~(1 << bit_num);
-      else
-        *(owner->raw_ptr) |= (1 << bit_num);
-    }
-
-  private:
-    friend class Register<size, RegisterAccess>;
-    Register<size, RegisterAccess> *owner;
-    unsigned int bit_num;
-  };
-
-public:
   explicit Register(std::uintptr_t address)
       : raw_ptr{reinterpret_cast<volatile BaseType *>(address)} {
     if (raw_ptr == nullptr) {
@@ -82,36 +52,76 @@ public:
     printDebug("Register constructor", read());
   }
 
-  void operator=(BaseType bit_mask) {
-    printDebug("Register write", bit_mask);
-    write(bit_mask);
+  // Bit Proxy class for bit manipulation
+  class BitProxy {
+  public:
+    BitProxy(Register &reg, std::size_t bit_position)
+        : register_(reg), bit_position_(bit_position) {}
+
+    // Read the bit
+    operator bool() const { return register_.getBit(bit_position_); }
+
+    // Write the bit
+    BitProxy &operator=(bool value) {
+      register_.setBit(bit_position_, value);
+      return *this;
+    }
+
+  private:
+    Register &register_;
+    std::size_t bit_position_;
+  };
+
+  // Bit access operator [] - provides a proxy for bit manipulation
+  BitProxy operator[](std::size_t bit_position) {
+    assert(raw_ptr != nullptr);
+    assert(bit_position < size);
+
+    return BitProxy(*this, bit_position);
   }
 
+  // Bit access operator [] - read
+  bool getBit(std::size_t bit_position) const {
+    assert(raw_ptr != nullptr);
+    assert(bit_position < size);
+
+    BaseType val = read();
+    return ((val >> bit_position) & 0x01) == 0x01;
+  }
+
+  // Bit access operator [] - write
+  void setBit(std::size_t bit_position, bool value) {
+    assert(raw_ptr != nullptr);
+    assert(bit_position < size);
+
+    BaseType val = read();
+    if (value) {
+      val |= (1U << bit_position); // Set the bit
+    } else {
+      val &= ~(1U << bit_position); // Clear the bit
+    }
+    write(val);
+  }
+
+  // Assignment operator to read the value
   operator BaseType() const {
     BaseType val = read();
-    printDebug("Register read", val);
+    printDebug("Register read (assignment operator)", val);
     return val;
   }
 
-  void operator|=(std::uint32_t bit_mask) {
-    BaseType val = read();
-    val |= bit_mask;
-    printDebug("Register OR=", val);
-    or_assign(bit_mask);
+  // Assignment operator to write the value
+  void operator=(BaseType value) {
+    write(value);
+    printDebug("Register =", value);
   }
 
-  void operator&=(std::uint32_t bit_mask) {
-    BaseType val = read();
-    val &= bit_mask;
-    printDebug("Register AND=", val);
-    and_assign(bit_mask);
-  }
-
+  // Increment and decrement operators
   BaseType &operator++() {
     BaseType val = read();
     ++val;
+    write(val);
     printDebug("Register ++", val);
-    ++(*raw_ptr);
     return *raw_ptr;
   }
 
@@ -119,16 +129,16 @@ public:
     BaseType old = read();
     BaseType val = old;
     ++val;
+    write(val);
     printDebug("Register post-increment", val);
-    operator++();
     return old;
   }
 
   BaseType &operator--() {
     BaseType val = read();
     --val;
+    write(val);
     printDebug("Register --", val);
-    --(*raw_ptr);
     return *raw_ptr;
   }
 
@@ -136,17 +146,56 @@ public:
     BaseType old = read();
     BaseType val = old;
     --val;
+    write(val);
     printDebug("Register post-decrement", val);
-    operator--();
     return old;
   }
 
-  Bitfield operator[](unsigned int index) {
-    if (index >= size) {
-      throw std::out_of_range("Bitfield index out of bounds.");
-    }
-    printDebug("Bitfield access");
-    return Bitfield{*this, index};
+  // Addition and subtraction operators
+  void operator+=(BaseType value) {
+    BaseType val = read();
+    val += value;
+    write(val);
+    printDebug("Register +=", val);
+  }
+
+  void operator-=(BaseType value) {
+    BaseType val = read();
+    val -= value;
+    write(val);
+    printDebug("Register -=", val);
+  }
+
+  // Bitwise NOT operator
+  void operator~() {
+    BaseType val = read();
+    val = ~val;
+    write(val);
+    printDebug("Register ~", val);
+  }
+
+  // Bitwise OR operator
+  void operator|=(BaseType bit_mask) {
+    BaseType val = read();
+    val |= bit_mask;
+    write(val);
+    printDebug("Register |=", val);
+  }
+
+  // Bitwise AND operator
+  void operator&=(BaseType bit_mask) {
+    BaseType val = read();
+    val &= bit_mask;
+    write(val);
+    printDebug("Register &=", val);
+  }
+
+  // Bitwise XOR operator
+  void operator^=(BaseType bit_mask) {
+    BaseType val = read();
+    val ^= bit_mask;
+    write(val);
+    printDebug("Register ^=", val);
   }
 
   std::uintptr_t GetAddress() const {
@@ -173,16 +222,6 @@ protected:
     return val;
   }
 
-  void or_assign(std::uint32_t bit_mask) {
-    *raw_ptr |= bit_mask;
-    printDebug("Raw OR=", *raw_ptr);
-  }
-
-  void and_assign(std::uint32_t bit_mask) {
-    *raw_ptr &= bit_mask;
-    printDebug("Raw AND=", *raw_ptr);
-  }
-
 private:
   volatile BaseType *raw_ptr;
 
@@ -195,14 +234,18 @@ private:
   }
 };
 
+/// @brief Helper struct to get the underlying type of an enum class
 template <typename E> struct UnderlyingType {
   typedef typename std::underlying_type<E>::type type;
 };
 
+/// @brief Helper struct to enable only enum types
 template <typename E> struct EnumTypesOnly {
   typedef typename std::enable_if<std::is_enum<E>::value, E>::type type;
 };
 
+/// @brief Converts an enum class to its underlying type (underlying type of the
+/// enum class)
 template <typename E, typename T = typename EnumTypesOnly<E>::type>
 constexpr typename UnderlyingType<E>::type EnumToUnderlyingType(E e) {
   return static_cast<typename UnderlyingType<E>::type>(e);
