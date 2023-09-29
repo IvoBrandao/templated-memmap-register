@@ -33,7 +33,7 @@ TEST_F(RegisterTest, ReadWriteTest) {
   // Perform write and read operations and check for correctness
   registerInstance = 0xABCD;
 
-  EXPECT_EQ(static_cast<uint32_t>(registerInstance), 0xABCD);
+  EXPECT_EQ(registerInstance, 0xABCD);
 }
 
 // Test case for bitwise OR assignment
@@ -41,7 +41,9 @@ TEST_F(RegisterTest, BitwiseORTest) {
   // Perform OR assignment and check for correctness
   registerInstance = 0xAAAA;
   registerInstance |= 0x5555;
-  EXPECT_EQ(static_cast<uint32_t>(registerInstance), 0xFFFF);
+  std::uint32_t val = registerInstance;
+
+  EXPECT_EQ(val, 0xFFFF);
 }
 
 // Test case for bitwise AND assignment
@@ -49,20 +51,17 @@ TEST_F(RegisterTest, BitwiseANDTest) {
   // Perform AND assignment and check for correctness
   registerInstance = 0xFFFF;
   registerInstance &= 0x5555;
-  EXPECT_EQ(static_cast<uint32_t>(registerInstance), 0x5555);
+  EXPECT_EQ(registerInstance, 0x5555);
 }
 
 // Test case for increment and decrement operations
 TEST_F(RegisterTest, IncrementDecrementTest) {
   // Perform increment and decrement operations and check for correctness
-  // registerInstance = 0x10;
-  // ++registerInstance;
-  // EXPECT_EQ(static_cast<uint32_t>(registerInstance), 0x11);
-  //
-  // registerInstance--;
-  // EXPECT_EQ(static_cast<uint32_t>(registerInstance), 0x10);
-
-  // Additional test cases can be added here
+  registerInstance = 1;
+  registerInstance++;
+  EXPECT_EQ(static_cast<uint32_t>(registerInstance), 2);
+  registerInstance--;
+  EXPECT_EQ(static_cast<uint32_t>(registerInstance), 1);
 }
 
 // Test case for bitfield access
@@ -73,5 +72,5 @@ TEST_F(RegisterTest, BitfieldAccessTest) {
   registerInstance[1] = 1;
   registerInstance[2] = 0;
 
-  EXPECT_EQ(static_cast<uint32_t>(registerInstance), 0b110);
+  EXPECT_EQ(registerInstance, 0x3);
 }
