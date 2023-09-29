@@ -21,14 +21,18 @@ protected:
   MockSystickImpl();
 
 public:
-  static MockInterfaceSystick *getMock();
   virtual ~MockSystickImpl();
-  MOCK_METHOD(void, Enable, ());
-  MOCK_METHOD(void, Disable, ());
-  MOCK_METHOD(void, AcknowledgeIrq, ());
-  MOCK_METHOD(std::uint32_t, GetInterval, ());
-  MOCK_METHOD(std::uint32_t, GetCount, ());
-  MOCK_METHOD(std::uint32_t, GetOverflow, ());
+  MOCK_METHOD(void, Enable, (), (override));
+  MOCK_METHOD(void, Disable, (), (override));
+  MOCK_METHOD(void, AcknowledgeIrq, (), (override));
+  MOCK_METHOD(std::uint32_t, GetInterval, (), (override));
+  MOCK_METHOD(std::uint32_t, GetCount, (), (override));
+  MOCK_METHOD(std::uint32_t, GetOverflow, (), (override));
+
+private:
+  SysTickRegisters mmr;
+  std::uint32_t dummy_registers[4];
+  std::uintptr_t mmr_base_address;
 };
 
 typedef ::testing::NiceMock<MockSystickImpl> Mock_Systick;

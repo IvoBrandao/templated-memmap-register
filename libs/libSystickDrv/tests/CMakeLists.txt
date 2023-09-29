@@ -15,7 +15,7 @@ file(GLOB SUBMODULE_TESTS_FAKES_SRC_FILES ${SUBMODULE_TESTS_FAKES_SRC_DIR}/*.cpp
 file(GLOB SUBMODULE_TESTS_SRC_FILES ${SUBMODULE_TESTS_SRC_DIR}/*.cpp)
 
 # Define the test executable for this library's tests
-add_executable(${SUBMODULE_TESTS_NAME} )
+add_executable(${SUBMODULE_TESTS_NAME})
 
 # Include the 'include' directory for library headers
 target_include_directories(${SUBMODULE_TESTS_NAME}
@@ -38,7 +38,7 @@ target_sources(${SUBMODULE_TESTS_NAME}
 )
 
 # Link the library being tested (e.g., 'libfoo')
-target_link_libraries(${SUBMODULE_TESTS_NAME} ${SUBMODULE_TESTS_DEPS} gmock_main gtest_main)
+target_link_libraries(${SUBMODULE_TESTS_NAME} ${SUBMODULE_TESTS_DEPS} gmock_main gtest_main gmock gtest)
 
 # Add tests using CTest (optional)
 gtest_add_tests(TARGET      ${SUBMODULE_TESTS_NAME}
@@ -46,3 +46,5 @@ gtest_add_tests(TARGET      ${SUBMODULE_TESTS_NAME}
 )
 # Add tests using CTest (optional)
 add_test(NAME ${SUBMODULE_TESTS_NAME} COMMAND ${SUBMODULE_TESTS_NAME})
+
+
