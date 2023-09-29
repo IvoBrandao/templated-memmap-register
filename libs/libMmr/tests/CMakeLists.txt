@@ -7,9 +7,14 @@ set(SUBMODULE_TESTS_FAKES_INC_DIR ${CMAKE_CURRENT_LIST_DIR}/fakes/include)
 set(SUBMODULE_TESTS_MOCK_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/mocks/sources)
 set(SUBMODULE_TESTS_FAKES_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/fakes/sources)
 
+file(GLOB SUBMODULE_TESTS_MOCK_SRC ${SUBMODULE_TESTS_MOCK_SRC_DIR}/*.cpp)
+file(GLOB SUBMODULE_TESTS_FAKES_SRC ${SUBMODULE_TESTS_FAKES_SRC_DIR}/*.cpp)
+file(GLOB SUBMODULE_TESTS_TESTS_SRC ${CMAKE_CURRENT_LIST_DIR}/*.cpp)
+
+
 include(GoogleTest)
 # Define the test executable for this library's tests
-add_executable(${SUBMODULE_TESTS_NAME})
+add_executable(${SUBMODULE_TESTS_NAME} )
 
 # Include the 'include' directory for library headers
 target_include_directories(${SUBMODULE_TESTS_NAME}
@@ -26,7 +31,9 @@ target_include_directories(${SUBMODULE_TESTS_NAME}
 # Add source files for the tests within this directory
 target_sources(${SUBMODULE_TESTS_NAME}
     PRIVATE
-        test_mmregister.cpp
+        ${SUBMODULE_TESTS_MOCK_SRC}
+        ${SUBMODULE_TESTS_FAKES_SRC}
+        ${SUBMODULE_TESTS_TESTS_SRC}
 )
 
 # Link the library being tested (e.g., 'libfoo')
