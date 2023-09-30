@@ -4,14 +4,18 @@ project(Example_Project)
 
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/tools/cmake/modules)
+set(CMAKE_PROJECT_DIR ${CMAKE_CURRENT_LIST_DIR})
+
 include(FetchContent)
 include(CTest)
 # Enable code coverage for GCC-based compilers
 if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 endif()
+
+include(Doxygen)
+include(PlantUml)
 include(CodeCoverage)
-append_coverage_compiler_flags()
 
 
 # Set C++ standard to C++17 or higher
@@ -40,5 +44,12 @@ add_subdirectory(libs)
 # CMakeLists.txt in the app directory
 add_executable(${PROJECT_NAME} app/source/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE app)
+
+
+add_custom_target(DependencyGraph
+COMMAND cmake --graphviz=DependencyGraph.dot .
+COMMAND dot -Tsvg DependencyGraph.dot -o DependencyGraph.svg
+WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+
 
 
